@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from .models import Post
 
@@ -28,9 +28,15 @@ def post_detail(request, id):
 
 
 def post_detail_slug(request, s):
-    p = Post.objects.get(slug=s)
+    
+    # p = Post.objects.get(slug=s)
+    p = get_object_or_404(Post, slug=s)
+    cs = p.comment_set.all()
+
+
     d = {
         'post': p,
+        'comments': cs,
     }
     return render(request, 'post_detail.html', d)
     

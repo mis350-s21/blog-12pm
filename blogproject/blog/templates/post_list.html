@@ -21,6 +21,8 @@
         </strong>
     
     created {{ p.created_at|timesince }} ago {{ p.get_status_display }}
+
+    number of comments {{ p.comment_set.count }}
     </li>
     {% endfor %}
 </ul>

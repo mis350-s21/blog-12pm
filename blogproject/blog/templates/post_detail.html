@@ -16,5 +16,28 @@ Post List
 <p>
     {{ post.body }}
 </p>
+
+{% if comments %}
+<h3>Comments:</h3>
+
+<ul>
+    {% for c in post.comment_set.all %}
+    <li>
+        {{ c.comment }}, by 
+        {% if c.author %}
+            {{ c.author }}
+        {% else %}
+            Anonymous
+        {% endif %}
+
+        , {{ c.created_on|timesince }} ago
+
+        for post: {{ c.post.title }}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<h4>No comments yet</h4>
+{% endif %}
 </body>
 </html>
